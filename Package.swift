@@ -19,7 +19,6 @@ let package = Package(
     ],
     products: [
         .library(name: "SpeziLicense", targets: ["SpeziLicense"])
-//        .plugin(name: "SwiftPackageListPlugin", targets: ["SwiftPackageListPlugin"])
     ],
     dependencies: [
         .package(
@@ -38,11 +37,6 @@ let package = Package(
                 .plugin(name: "SwiftPackageListPlugin", package: "swift-package-list"),
             ]
         ),
-//        .plugin(
-//            name: "SwiftPackageListPlugin",
-//            capability: .buildTool(),
-//            dependencies: [.product(name: "SwiftPackageList", package: "swift-package-list")]
-//        ),
         .testTarget(
             name: "SpeziLicenseTests",
             dependencies: [

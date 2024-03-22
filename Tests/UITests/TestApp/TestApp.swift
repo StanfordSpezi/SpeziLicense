@@ -7,7 +7,6 @@
 //
 
 import SpeziLicense
-//import SpeziViews
 import SwiftUI
 
 
