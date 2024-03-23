@@ -44,7 +44,6 @@
 		2F8A431229130A8C005D2B8F /* TestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppUITests.swift; sourceTree = "<group>"; };
 		2FA7382B290ADFAA007ACEB9 /* TestApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
 		2FB0758A299DDB9000C0B37F /* TestApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestApp.xctestplan; sourceTree = "<group>"; };
-		56A038B92BAC4A6C00E0D1C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		56A038C82BAC520200E0D1C4 /* SpeziLicense */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SpeziLicense; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,7 +91,6 @@
 		2F6D139428F5F384007C25D6 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
-				56A038B92BAC4A6C00E0D1C4 /* Info.plist */,
 				2FA7382B290ADFAA007ACEB9 /* TestApp.swift */,
 				2F6D139928F5F386007C25D6 /* Assets.xcassets */,
 			);
@@ -185,6 +183,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 2F6D138928F5F384007C25D6;
 			packageReferences = (

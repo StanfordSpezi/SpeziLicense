@@ -13,7 +13,15 @@
       }
     },
     "Packages" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Packages"
+          }
+        }
+      }
     },
     "Please refer to the individual repository links for packages without license labels." : {
       "extractionState" : "manual",
@@ -27,21 +35,24 @@
       }
     },
     "Repository Link" : {
-
-    },
-    "The following list contains all Swift Package dependencies of the application." : {
-      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die folgende Liste enthält alle Swift-Paket-Abhängigkeiten der App."
+            "value" : "Repository Link"
           }
         }
       }
     },
     "The following list contains all Swift Package dependencies of the SpeziTemplateApplication." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die folgende Liste enthält alle Swift-Paket-Abhängigkeiten der SpeziTemplateApplication."
+          }
+        }
+      }
     },
     "This project is licensed under the MIT License." : {
       "extractionState" : "manual",
