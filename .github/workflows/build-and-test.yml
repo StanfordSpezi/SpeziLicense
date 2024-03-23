@@ -29,16 +29,6 @@ jobs:
       path: 'Tests/UITests'
       scheme: TestApp
       artifactname: TestApp.xcresult
-  codeql:
-    name: CodeQL
-    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
-    with:
-      codeql: true
-      xcodeversion: '14.3.1'
-      scheme: SpeziLicense
-    permissions:
-      security-events: write
-      actions: read
   uploadcoveragereport:
     name: Upload Coverage Report
     needs: [packageios, ios]
