@@ -13,6 +13,7 @@ import SwiftUI
 struct PackageCell: View {
     let package: Package
     
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -31,16 +32,21 @@ struct PackageCell: View {
                 }
             }
             Spacer()
-            Button(action: {
-                UIApplication.shared.open(package.repositoryURL)
-            }) {
-                Image(systemName: "safari.fill")
-                    .imageScale(.large)
-            }.buttonStyle(PlainButtonStyle())
+            Button(
+                action: {
+                    UIApplication.shared.open(package.repositoryURL)
+                },
+                label: {
+                    Image(systemName: "safari.fill")
+                        .imageScale(.large)
+                }
+            )
+                .buttonStyle(PlainButtonStyle())
                 .foregroundColor(.blue)
                 .accessibilityLabel(Text("Repository Link"))
         }
     }
+    
     
     func getPackageDetails(package: Package) -> String {
         if let branch = package.branch {

@@ -13,31 +13,32 @@ import SwiftUI
 public struct ContributionsList: View {
     var packages: [Package]
     
-    public init() {
-        self.packages = PackageHelper.getPackageList()
-    }
-    
-    init(packages: [Package]) {
-        self.packages = packages
-    }
     
     public var body: some View {
             List {
-//
-                Section(footer: Text("PROJECT_LICENSE_DESCRIPTION", bundle: .module)) {
-                    Text("CONTRIBUTIONS_LIST_DESCRIPTION", bundle: .module)
+                Section(footer: Text("This project is licensed under the MIT License.", bundle: .module)) {
+                    Text("The following list contains all Swift Package dependencies of the SpeziTemplateApplication.", bundle: .module)
                 }
                 Section(
-                    header: Text("CONTRIBUTIONS_LIST_HEADER", bundle: .module),
-                    footer: Text("CONTRIBUTIONS_LIST_FOOTER", bundle: .module)
+                    header: Text("Packages", bundle: .module),
+                    footer: Text("Please refer to the individual repository links for packages without license labels.", bundle: .module)
                 ) {
                     ForEach(packages.sorted(by: { $0.name < $1.name }), id: \.name) { package in
                         PackageCell(package: package)
                     }
                 }
             }
-            .navigationTitle("LICENSE_INFO_TITLE")
+                .navigationTitle("License Information")
                 .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    
+    public init() {
+        self.packages = PackageHelper.getPackageList()
+    }
+    
+    init(packages: [Package]) {
+        self.packages = packages
     }
 }
 
@@ -46,7 +47,7 @@ public struct ContributionsList: View {
 #Preview {
     let mockPackages = [
         Package(
-            identity: "MockPackage", 
+            identity: "MockPackage",
             name: "MockPackage",
             version: "1.0",
             branch: nil,
