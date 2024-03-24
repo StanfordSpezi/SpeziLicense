@@ -29,9 +29,11 @@ jobs:
       path: 'Tests/UITests'
       scheme: TestApp
       artifactname: TestApp.xcresult
+      xcargs: '-skipPackagePluginValidation'
+
   uploadcoveragereport:
     name: Upload Coverage Report
     needs: [packageios, ios]
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
     with:
-      coveragereports: TemplatePackage.xcresult TestApp.xcresult
+      coveragereports: SpeziLicense.xcresult TestApp.xcresult
