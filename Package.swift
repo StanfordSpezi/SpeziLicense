@@ -32,10 +32,6 @@ let package = Package(
             dependencies: [
                 .product(name: "SwiftPackageList", package: "swift-package-list")
             ]
-            ,
-            plugins: [
-                .plugin(name: "SwiftPackageListPlugin", package: "swift-package-list")
-            ]
         ),
         .testTarget(
             name: "SpeziLicenseTests",
