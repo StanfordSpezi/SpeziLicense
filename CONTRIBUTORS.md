@@ -1,7 +1,7 @@
 <!--
                   
 #
-# This source file is part of the TemplatePackage open source project
+# This source file is part of the Stanford Spezi open source project
 #
 # SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
 #
@@ -10,8 +10,8 @@
              
 -->
 
-TemplatePackage contributors
+SpeziLicense contributors
 ====================
 
 * [Paul Schmiedmayer](https://github.com/PSchmiedmayer)
-* [Vishnu Ravi](https://github.com/vishnuravi)
+* [Nikolai Madlener](https://github.com/nikolaimadlener)

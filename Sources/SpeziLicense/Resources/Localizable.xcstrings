@@ -1,0 +1,70 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "License Information" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lizenz-Informationen"
+          }
+        }
+      }
+    },
+    "Packages" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Packages"
+          }
+        }
+      }
+    },
+    "Please refer to the individual repository links for packages without license labels." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte beachten Sie die Links zu den einzelnen Repositories für Pakete ohne Lizenzkennzeichnung."
+          }
+        }
+      }
+    },
+    "Repository Link" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repository Link"
+          }
+        }
+      }
+    },
+    "The following list contains all Swift Package dependencies of the SpeziTemplateApplication." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die folgende Liste enthält alle Swift-Paket-Abhängigkeiten der SpeziTemplateApplication."
+          }
+        }
+      }
+    },
+    "This project is licensed under the MIT License." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Projekt ist unter der MIT-Lizenz lizenziert."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
