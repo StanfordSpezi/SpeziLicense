@@ -29,7 +29,6 @@ jobs:
       path: 'Tests/UITests'
       scheme: TestApp
       artifactname: TestApp.xcresult
-      xcargs: '-skipPackagePluginValidation'
 
   uploadcoveragereport:
     name: Upload Coverage Report
