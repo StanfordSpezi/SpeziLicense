@@ -56,10 +56,10 @@ The code example below showcases how to render a simple list view with all used 
 import SpeziLicense
 import SwiftUI
 
-struct PackageDependenciesDemoView: View {
+struct ExamplePackageDependenciesView: View {
 
     var body: some View {
-        ContributionsList()
+        ContributionsList(projectLicense: "MIT")
     }
 }
 ```

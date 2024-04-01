@@ -9,6 +9,12 @@
             "state" : "translated",
             "value" : "Lizenz-Informationen"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "License Information"
+          }
         }
       }
     },
@@ -16,6 +22,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Packages"
+          }
+        },
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Packages"
@@ -31,6 +43,12 @@
             "state" : "translated",
             "value" : "Bitte beachten Sie die Links zu den einzelnen Repositories für Pakete ohne Lizenzkennzeichnung."
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please refer to the individual repository links for packages without license labels."
+          }
         }
       }
     },
@@ -41,26 +59,43 @@
             "state" : "translated",
             "value" : "Repository Link"
           }
-        }
-      }
-    },
-    "The following list contains all Swift Package dependencies of the SpeziTemplateApplication." : {
-      "localizations" : {
-        "de" : {
+        },
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die folgende Liste enthält alle Swift-Paket-Abhängigkeiten der SpeziTemplateApplication."
+            "value" : "Repository Link"
           }
         }
       }
     },
-    "This project is licensed under the MIT License." : {
-      "extractionState" : "manual",
+    "The following list contains all Swift Package dependencies of the %@ app." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dieses Projekt ist unter der MIT-Lizenz lizenziert."
+            "value" : "Die folgende Liste enthält alle Swift-Paket-Abhängigkeiten der %@ App."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The following list contains all Swift Package dependencies of the %@ app."
+          }
+        }
+      }
+    },
+    "This project is licensed under the %@ License." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Projekt ist unter der %@-Lizenz lizenziert."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This project is licensed under the %@ License."
           }
         }
       }

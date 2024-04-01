@@ -22,6 +22,7 @@ class TestAppUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(app.staticTexts["This project is licensed under the MIT License."].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.staticTexts["The following list contains all Swift Package dependencies of the TestApp app."].waitForExistence(timeout: 2))
         XCTAssertTrue(app.buttons["Repository Link"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.staticTexts["Spezi"].waitForExistence(timeout: 2))
     }

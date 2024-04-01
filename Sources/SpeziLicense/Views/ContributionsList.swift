@@ -10,14 +10,36 @@ import SwiftPackageList
 import SwiftUI
 
 
+/// Present a `ContributionsList` including all used Swift Packages to the user.
+///
+/// The following example shows how to use the ContributionsList:
+/// ```swift
+/// import SpeziLicense
+/// import SwiftUI
+///
+/// struct ExamplePackageDependenciesView: View {
+///
+///     var body: some View {
+///         ContributionsList(appName: "ExamplePackageDependenciesApp", projectLicense: "MIT")
+///     }
+/// }
+/// ```
 public struct ContributionsList: View {
     var packages: [Package]
-    
+    let appName: String?
+    let projectLicense: String?
+
     
     public var body: some View {
             List {
-                Section(footer: Text("This project is licensed under the MIT License.", bundle: .module)) {
-                    Text("The following list contains all Swift Package dependencies of the SpeziTemplateApplication.", bundle: .module)
+                Section {
+                    if let appName {
+                        Text("The following list contains all Swift Package dependencies of the \(appName) app.", bundle: .module)
+                    }
+                } footer: {
+                    if let projectLicense {
+                        Text("This project is licensed under the \(projectLicense) License.", bundle: .module)
+                    }
                 }
                 Section(
                     header: Text("Packages", bundle: .module),
@@ -32,13 +54,26 @@ public struct ContributionsList: View {
                 .navigationBarTitleDisplayMode(.inline)
     }
     
-    
-    public init() {
+    /// - Parameter projectLicense: Optional SPDX-License-Identifier to inform user about the project's license.
+    public init(projectLicense: String? = nil) {
         self.packages = PackageHelper.getPackageList()
+        self.appName = Bundle.main.applicationName
+        self.projectLicense = projectLicense
     }
     
-    init(packages: [Package]) {
+    /// - Parameters:
+    ///   - appName: The name of the app to be rendered in the information text at the top of the view instead of the Display Name configured in the Xcode project.
+    ///   - projectLicense: Optional SPDX-License-Identifier to inform user about the project's license.
+    public init(appName: String, projectLicense: String? = nil) {
+        self.packages = PackageHelper.getPackageList()
+        self.appName = appName
+        self.projectLicense = projectLicense
+    }
+    
+    init(packages: [Package], appName: String, projectLicense: String? = nil) {
         self.packages = packages
+        self.appName = appName
+        self.projectLicense = projectLicense
     }
 }
 
@@ -59,6 +94,6 @@ public struct ContributionsList: View {
             license: "MIT License"
         )
     ]
-    return ContributionsList(packages: mockPackages)
+    return ContributionsList(packages: mockPackages, appName: "TestApp", projectLicense: "MIT")
 }
 #endif
