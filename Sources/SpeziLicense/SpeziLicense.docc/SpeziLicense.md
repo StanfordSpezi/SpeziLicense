@@ -29,11 +29,7 @@ You need to add the SpeziLicense and [SwiftPackageList](https://github.com/Felix
 [your app in Xcode](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app#) or
 [Swift package](https://developer.apple.com/documentation/xcode/creating-a-standalone-swift-package-with-xcode#Add-a-dependency-on-another-Swift-package).
 
-### 2. Add the Run Script Phase to your Xcode Project
-
-Follow the "Run Script Phase" setup steps of the [SwiftPackageList](https://github.com/FelixHerrmann/swift-package-list?tab=readme-ov-file#run-script-phase) documentation.
-
-### 3. Add the SwiftPackageListPlugin to your Xcode Project
+### 2. Add the SwiftPackageListPlugin to your Xcode Project
 
 Add the SwiftPackageListPlugin to the "Run Build Tool Plug-ins" in your Build Phases settings of your Xcode project as described in the [SwiftPackageList](https://github.com/FelixHerrmann/swift-package-list?tab=readme-ov-file#build-tool-plugin) documentation.
 
