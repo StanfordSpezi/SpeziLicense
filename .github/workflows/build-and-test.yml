@@ -41,7 +41,7 @@ jobs:
 
   uploadcoveragereport:
     name: Upload Coverage Report
-    needs: [packageios, ios]
+    needs: [packageios, ios, ipados]
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
     with:
-      coveragereports: SpeziLicense.xcresult TestApp.xcresult
+      coveragereports: SpeziLicense.xcresult TestApp.xcresult TestAppiPadOS.xcresult
