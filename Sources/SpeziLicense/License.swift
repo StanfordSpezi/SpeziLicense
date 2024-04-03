@@ -34,11 +34,11 @@ extension License {
     /// Represents the Apache License 2.0
     public static let apachev2 = License(name: "Apache License 2.0", spdxIdentifier: "Apache-2.0")
     
-    /// Represents the GNU General Public License
-    public static let gplv2only = License(name: "GNU General Public License", spdxIdentifier: "GPL-2.0-only")
-    
     /// Represents the GNU General Public License version 2.0
-    public static let gplv2later = License(name: "GNU General Public License version 2.0", spdxIdentifier: "GPL-2.0-or-later")
+    public static let gplv2 = License(name: "GNU General Public License v2.0", spdxIdentifier: "GPL-2.0-only")
+    
+    /// Represents the GNU General Public License version 3.0
+    public static let gplv3 = License(name: "GNU General Public License v3.0", spdxIdentifier: "GPL-3.0-only")
     
     /// Represents the BSD 2-Clause "Simplified" License
     public static let bsd2 = License(name: "BSD 2-Clause \"Simplified\" License", spdxIdentifier: "BSD-2-Clause")

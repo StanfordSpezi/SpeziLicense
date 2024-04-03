@@ -21,7 +21,7 @@ struct PackageCell: View {
                 HStack {
                     Text(getPackageDetails(package: package))
                         .font(.caption)
-                    if let licenseType = package.getLicenseType(license: package.license) {
+                    if let licenseType = License(package: package) {
                         Text(licenseType.spdxIdentifier)
                             .font(.caption)
                             .fontWeight(.semibold)
