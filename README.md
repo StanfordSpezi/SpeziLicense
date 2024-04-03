@@ -55,7 +55,7 @@ import SwiftUI
 struct ExamplePackageDependenciesView: View {
 
     var body: some View {
-        ContributionsList(projectLicense: "MIT")
+        ContributionsList(projectLicense: .mit)
     }
 }
 ```

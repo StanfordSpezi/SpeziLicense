@@ -27,7 +27,7 @@ import SwiftUI
 public struct ContributionsList: View {
     var packages: [Package]
     let appName: String?
-    let projectLicense: String?
+    let projectLicense: License?
 
     
     public var body: some View {
@@ -38,7 +38,7 @@ public struct ContributionsList: View {
                     }
                 } footer: {
                     if let projectLicense {
-                        Text("This project is licensed under the \(projectLicense) License.", bundle: .module)
+                        Text("This project is licensed under the \(projectLicense.name).", bundle: .module)
                     }
                 }
                 Section(
@@ -55,7 +55,7 @@ public struct ContributionsList: View {
     }
     
     /// - Parameter projectLicense: Optional SPDX-License-Identifier to inform user about the project's license.
-    public init(projectLicense: String? = nil) {
+    public init(projectLicense: License? = nil) {
         self.packages = PackageHelper.getPackageList()
         self.appName = Bundle.main.applicationName
         self.projectLicense = projectLicense
@@ -64,13 +64,13 @@ public struct ContributionsList: View {
     /// - Parameters:
     ///   - appName: The name of the app to be rendered in the information text at the top of the view instead of the Display Name configured in the Xcode project.
     ///   - projectLicense: Optional SPDX-License-Identifier to inform user about the project's license.
-    public init(appName: String, projectLicense: String? = nil) {
+    public init(appName: String, projectLicense: License? = nil) {
         self.packages = PackageHelper.getPackageList()
         self.appName = appName
         self.projectLicense = projectLicense
     }
     
-    init(packages: [Package], appName: String, projectLicense: String? = nil) {
+    init(packages: [Package], appName: String, projectLicense: License? = nil) {
         self.packages = packages
         self.appName = appName
         self.projectLicense = projectLicense
@@ -94,6 +94,6 @@ public struct ContributionsList: View {
             license: "MIT License"
         )
     ]
-    return ContributionsList(packages: mockPackages, appName: "TestApp", projectLicense: "MIT")
+    return ContributionsList(packages: mockPackages, appName: "TestApp", projectLicense: .mit)
 }
 #endif
