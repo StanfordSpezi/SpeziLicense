@@ -31,6 +31,9 @@ let package = Package(
             name: "SpeziLicense",
             dependencies: [
                 .product(name: "SwiftPackageList", package: "swift-package-list")
+            ],
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency")
             ]
         ),
         .testTarget(
@@ -38,6 +41,9 @@ let package = Package(
             dependencies: [
                 .target(name: "SpeziLicense"),
                 .product(name: "Spezi", package: "Spezi")
+            ],
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency")
             ]
         )
     ]

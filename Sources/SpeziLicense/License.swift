@@ -10,7 +10,7 @@ import Foundation
 
 
 /// License struct to be passed to `ContributionsList`
-public struct License {
+public struct License: Sendable {
     /// The full name of the License
     public let name: String
     /// The standardized SPDX-License-Identifier
