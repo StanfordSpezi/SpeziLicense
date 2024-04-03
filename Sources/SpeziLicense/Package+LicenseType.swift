@@ -45,21 +45,21 @@ extension License {
             return nil
         }
         
-        if license.contains(Self.mitText) {
+        if license.contains(License.mitText) {
             self = .mit
-        } else if license.contains(Self.apacheText) && license.contains("Version 2.0") {
+        } else if license.contains(License.apacheText) && license.contains("Version 2.0") {
             self = .apachev2
-        } else if license.contains(Self.gnuText) && license.contains("Version 2") {
+        } else if license.contains(License.gnuText) && license.contains("Version 2") {
             self = .gplv2
-        } else if license.contains(Self.gnuText) && license.contains("Version 3") {
+        } else if license.contains(License.gnuText) && license.contains("Version 3") {
             self = .gplv3
-        } else if license.contains(Self.bsdFourClauseText) {
+        } else if license.contains(License.bsdFourClauseText) {
             self = .bsd4
-        } else if license.range(of: Self.bsdThreeClausePattern, options: .regularExpression) != nil {
+        } else if license.range(of: License.bsdThreeClausePattern, options: .regularExpression) != nil {
             self = .bsd3
-        } else if license.contains(Self.bsdTwoClauseText) {
+        } else if license.contains(License.bsdTwoClauseText) {
             self = .bsd2
-        } else if license.range(of: Self.zlibPattern, options: .regularExpression) != nil {
+        } else if license.range(of: License.zlibPattern, options: .regularExpression) != nil {
             self = .zlib
         } else {
             return nil
