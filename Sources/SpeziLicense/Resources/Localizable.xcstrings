@@ -81,21 +81,8 @@
         }
       }
     },
-    "This project is licensed under the %@ License." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieses Projekt ist unter der %@-Lizenz lizenziert."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This project is licensed under the %@ License."
-          }
-        }
-      }
+    "This project is licensed under the %@." : {
+
     }
   },
   "version" : "1.0"
