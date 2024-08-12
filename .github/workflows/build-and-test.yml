@@ -47,3 +47,5 @@ jobs:
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
     with:
       coveragereports: SpeziLicense.xcresult TestApp.xcresult TestAppiPadOS.xcresult
+    secrets:
+      token: ${{ secrets.CODECOV_TOKEN }}
