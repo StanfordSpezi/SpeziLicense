@@ -17,7 +17,7 @@ Provides a view that renders a list of all package dependecies used in the proje
 
 | ![Screenshot showing the ContributionsList.](Sources/SpeziLicense/SpeziLicense.docc/Resources/Overview.png#gh-light-mode-only) ![Screenshot showing the ContributionsList.](Sources/SpeziLicense/SpeziLicense.docc/Resources/Overview~dark.png#gh-dark-mode-only) |
  |:---:|
- | A [`ContributionsList`](https://swiftpackageindex.com/stanfordspezi/spezilicense/documentation/spezilicense/contactslist) rendered in the Spezi Template Application. |
+ | A [`ContributionsList`](https://swiftpackageindex.com/stanfordspezi/spezilicense/documentation/spezilicense/contributionslist) rendered in the Spezi Template Application. |
 
 ## Overview
 
