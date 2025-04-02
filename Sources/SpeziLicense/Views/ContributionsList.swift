@@ -82,15 +82,13 @@ public struct ContributionsList: View {
 #Preview {
     let mockPackages = [
         Package(
+            kind: .remoteSourceControl,
             identity: "MockPackage",
             name: "MockPackage",
             version: "1.0",
             branch: nil,
             revision: "0",
-            // We use a force unwrap in the preview as we can not recover from an error here
-            // and the code will never end up in a production environment.
-            // swiftlint:disable:next force_unwrapping
-            repositoryURL: URL(string: "github.com")!,
+            location: "https://github.com/StanfordSpezi/MockPackage.git",
             license: "MIT License"
         )
     ]
