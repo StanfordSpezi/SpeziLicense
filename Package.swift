@@ -29,7 +29,7 @@ let package = Package(
         .library(name: "SpeziLicense", targets: ["SpeziLicense"])
     ],
     dependencies: [
-        .package(url: "https://github.com/FelixHerrmann/swift-package-list.git", from: "4.1.0"),
+        .package(url: "https://github.com/FelixHerrmann/swift-package-list.git", from: "4.7.1"),
         .package(url: "https://github.com/StanfordSpezi/Spezi", from: "1.6.0")
     ] + swiftLintPackage(),
     targets: [
