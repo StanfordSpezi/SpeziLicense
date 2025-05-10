@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:6.0
 
 //
 // This source file is part of the Stanford Spezi open source project
@@ -12,13 +12,6 @@ import class Foundation.ProcessInfo
 import PackageDescription
 
 
-#if swift(<6)
-let swiftConcurrency: SwiftSetting = .enableExperimentalFeature("StrictConcurrency")
-#else
-let swiftConcurrency: SwiftSetting = .enableUpcomingFeature("StrictConcurrency")
-#endif
-
-
 let package = Package(
     name: "SpeziLicense",
     defaultLocalization: "en",
@@ -29,7 +22,7 @@ let package = Package(
         .library(name: "SpeziLicense", targets: ["SpeziLicense"])
     ],
     dependencies: [
-        .package(url: "https://github.com/FelixHerrmann/swift-package-list.git", from: "4.1.0"),
+        .package(url: "https://github.com/FelixHerrmann/swift-package-list.git", from: "4.8.0"),
         .package(url: "https://github.com/StanfordSpezi/Spezi", from: "1.6.0")
     ] + swiftLintPackage(),
     targets: [
@@ -38,9 +31,7 @@ let package = Package(
             dependencies: [
                 .product(name: "SwiftPackageList", package: "swift-package-list")
             ],
-            swiftSettings: [
-                swiftConcurrency
-            ],
+            swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
             plugins: [] + swiftLintPlugin()
         ),
         .testTarget(
@@ -49,9 +40,7 @@ let package = Package(
                 .target(name: "SpeziLicense"),
                 .product(name: "Spezi", package: "Spezi")
             ],
-            swiftSettings: [
-                swiftConcurrency
-            ],
+            swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
             plugins: [] + swiftLintPlugin()
         )
     ]
@@ -69,7 +58,7 @@ func swiftLintPlugin() -> [Target.PluginUsage] {
 
 func swiftLintPackage() -> [PackageDescription.Package.Dependency] {
     if ProcessInfo.processInfo.environment["SPEZI_DEVELOPMENT_SWIFTLINT"] != nil {
-        [.package(url: "https://github.com/realm/SwiftLint.git", from: "0.55.1")]
+        [.package(url: "https://github.com/realm/SwiftLint.git", from: "0.59.1")]
     } else {
         []
     }

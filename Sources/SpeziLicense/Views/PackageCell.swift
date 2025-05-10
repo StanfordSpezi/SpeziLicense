@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import OSLog
 import SwiftPackageList
 import SwiftUI
 
@@ -19,8 +20,10 @@ struct PackageCell: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(package.name).font(.headline)
                 HStack {
-                    Text(getPackageDetails(package: package))
-                        .font(.caption)
+                    if let details = getPackageDetails(package: package) {
+                        Text(details)
+                            .font(.caption)
+                    }
                     if let licenseType = License(package: package) {
                         Text(licenseType.spdxIdentifier)
                             .font(.caption)
@@ -34,7 +37,12 @@ struct PackageCell: View {
             Spacer()
             Button(
                 action: {
-                    UIApplication.shared.open(package.repositoryURL)
+                    if let url = URL(string: package.location) {
+                        UIApplication.shared.open(url)
+                    } else {
+                        let logger = Logger(subsystem: "edu.stanford.spezi.SpeziLicense", category: "UI")
+                        logger.error("Unable to parse package location into URL: '\(package.location)'")
+                    }
                 },
                 label: {
                     Image(systemName: "safari.fill")
@@ -48,13 +56,15 @@ struct PackageCell: View {
     }
     
     
-    func getPackageDetails(package: Package) -> String {
+    func getPackageDetails(package: Package) -> String? {
         if let branch = package.branch {
-            return "Branch: \(branch)"
+            "Branch: \(branch)"
         } else if let version = package.version {
-            return "Version: \(version)"
+            "Version: \(version)"
+        } else if let revision = package.revision {
+            "Revision: \(revision)"
         } else {
-            return "Revision: \(package.revision)"
+            nil
         }
     }
 }
@@ -63,15 +73,13 @@ struct PackageCell: View {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     let mockPackage = Package(
+        kind: .remoteSourceControl,
         identity: "MockPackage",
         name: "MockPackage",
         version: "1.0",
         branch: nil,
         revision: "0",
-        // We use a force unwrap in the preview as we can not recover from an error here
-        // and the code will never end up in a production environment.
-        // swiftlint:disable:next force_unwrapping
-        repositoryURL: URL(string: "github.com")!,
+        location: "https://github.com/StanfordSpezi/MockPackage.git",
         license: "MIT License"
     )
     
