@@ -10,8 +10,7 @@ version: 1
 builder:
   configs:
     - platform: ios
-      scheme: Spezi
+      scheme: SpeziLicense
       swift_version: 6
       documentation_targets:
-      - Spezi
-      - SpeziTesting
+      - SpeziLicense
