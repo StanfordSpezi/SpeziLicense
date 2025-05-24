@@ -12,12 +12,12 @@
     "codeCoverage" : {
       "targets" : [
         {
-          "containerPath" : "container:",
+          "containerPath" : "container:..\/..",
           "identifier" : "SpeziLicense",
           "name" : "SpeziLicense"
         },
         {
-          "containerPath" : "container:",
+          "containerPath" : "container:..\/..",
           "identifier" : "SpeziLicenseTests",
           "name" : "SpeziLicenseTests"
         }

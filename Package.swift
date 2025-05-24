@@ -1,7 +1,7 @@
 // swift-tools-version:6.0
 
 //
-// This source file is part of the Stanford Spezi open source project
+// This source file is part of the Stanford Spezi open-source project
 //
 // SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
 //
@@ -23,7 +23,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/FelixHerrmann/swift-package-list.git", from: "4.8.0"),
-        .package(url: "https://github.com/StanfordSpezi/Spezi", from: "1.6.0")
+        .package(url: "https://github.com/StanfordSpezi/Spezi", from: "1.8.2")
     ] + swiftLintPackage(),
     targets: [
         .target(
