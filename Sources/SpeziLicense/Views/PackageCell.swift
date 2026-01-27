@@ -12,7 +12,7 @@ import SwiftUI
 
 
 struct PackageCell: View {
-    struct Config {
+    struct Config: Hashable {
         let name: String
         let versionString: String?
         let url: URL?
@@ -23,6 +23,9 @@ struct PackageCell: View {
     private let config: Config
     
     var body: some View {
+        // - if we have the package's license text: the cell is a NavigationLink that shows the license text, and has a button to open the package's web site
+        // - if we don't have the text: the cell is a button that directly opens the web site
+        // - if we have neither the license text, nor the url: the cell is a button that does nothing.
         if let licenseText = config.licenseText {
             NavigationLink {
                 licenseView(licenseText)
@@ -30,12 +33,13 @@ struct PackageCell: View {
                 rowContent
             }
         } else {
-            HStack {
+            Button {
+                openPackageUrl()
+            } label: {
                 rowContent
-                // If the view is not embedded in a NavigationLink, we need to manually add a DisclosureIndicator to the trailing edge, to
-                // keep the layout in sync with what we have in the surrounding rows.
-                DisclosureIndicator()
+                    .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
         }
     }
     
@@ -55,25 +59,14 @@ struct PackageCell: View {
                 }
             }
             Spacer()
-            if let openPackageUrlButton {
-                openPackageUrlButton
-                    .buttonStyle(.plain)
-                    .foregroundStyle(.blue)
+            if config.licenseText == nil {
+                // If we don't have a licence text to push, the row view is not embedded in a NavigationLink,
+                // and we need to manually add the disclosure indicator to keep the layout in sync with the surrounding rows.
+                DisclosureIndicator()
             }
         }
     }
     
-    private var openPackageUrlButton: (some View)? {
-        if let url = config.url {
-            Button("Open in Browser", systemImage: "safari") {
-                UIApplication.shared.open(url)
-            }
-            .labelStyle(.iconOnly)
-            .imageScale(.large)
-        } else {
-            nil
-        }
-    }
     
     init(config: Config) {
         self.config = config
@@ -88,6 +81,7 @@ struct PackageCell: View {
             licenseText: package.license
         )
     }
+    
     
     private func licenseBadge(for licenseType: License) -> some View {
         Text(licenseType.spdxIdentifier)
@@ -105,11 +99,19 @@ struct PackageCell: View {
         }
         .navigationTitle(config.name)
         .toolbar {
-            if let openPackageUrlButton {
+            if config.url != nil {
                 ToolbarItem(placement: .primaryAction) {
-                    openPackageUrlButton
+                    Button("Open in Browser", systemImage: "safari") {
+                        openPackageUrl()
+                    }
                 }
             }
+        }
+    }
+    
+    private func openPackageUrl() {
+        if let url = config.url {
+            UIApplication.shared.open(url)
         }
     }
 }

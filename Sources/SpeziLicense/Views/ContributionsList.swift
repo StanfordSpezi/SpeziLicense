@@ -36,7 +36,7 @@ public struct ContributionsList: View {
     
     public var body: some View {
         Form {
-            Section(LocalizedStringResource("App", bundle: .module)) {
+            Section {
                 PackageCell(config: appSectionRowConfig)
             }
             Section {
