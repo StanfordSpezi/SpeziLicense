@@ -23,10 +23,30 @@ class TestAppUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(app.wait(for: .runningForeground, timeout: 2.0))
+        
+        print(app.debugDescription)
+//        fatalError()
 
-        XCTAssertTrue(app.staticTexts["This project is licensed under the MIT License."].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.staticTexts["The following list contains all Swift Package dependencies of the TestApp app."].exists)
-        XCTAssertTrue(app.buttons["Repository Link"].exists)
-        XCTAssertTrue(app.staticTexts["Spezi"].exists)
+        XCTAssertTrue(app.buttons["TestApp, MIT, 1.0"].waitForExistence(timeout: 2))
+        let speziButton = app.buttons.matching(NSPredicate(
+            format: "label LIKE 'Spezi, MIT, Version: 1.*.*'"
+        )).element
+        XCTAssertTrue(speziButton.exists)
+        speziButton.tap()
+        
+        sleep(1)
+        print(app.debugDescription)
+        let licensePred = NSPredicate(
+            format: "label CONTAINS 'Copyright (c) 2022 Stanford University and the project authors (see CONTRIBUTORS.md)'"
+        )
+        XCTAssert(app.staticTexts.matching(licensePred).element.exists)
+        app.navigationBars.buttons["Open in Browser"].tap()
+        
+        let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+        XCTAssert(
+            safari.staticTexts[
+                "Open-source framework for rapid development of modern, interoperable digital health applications."
+            ].waitForExistence(timeout: 10)
+        )
     }
 }
