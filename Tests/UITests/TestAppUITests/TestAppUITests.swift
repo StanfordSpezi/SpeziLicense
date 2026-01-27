@@ -12,7 +12,6 @@ import XCTest
 class TestAppUITests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
         continueAfterFailure = false
     }
     
@@ -21,11 +20,7 @@ class TestAppUITests: XCTestCase {
     func testSpeziLicense() throws {
         let app = XCUIApplication()
         app.launch()
-
         XCTAssertTrue(app.wait(for: .runningForeground, timeout: 2.0))
-        
-        print(app.debugDescription)
-//        fatalError()
 
         XCTAssertTrue(app.buttons["TestApp, MIT, 1.0"].waitForExistence(timeout: 2))
         let speziButton = app.buttons.matching(NSPredicate(
