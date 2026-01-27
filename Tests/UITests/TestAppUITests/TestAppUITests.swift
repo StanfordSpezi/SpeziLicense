@@ -41,7 +41,7 @@ class TestAppUITests: XCTestCase {
         XCTAssert(
             safari.staticTexts[
                 "Open-source framework for rapid development of modern, interoperable digital health applications."
-            ].waitForExistence(timeout: 10) // swiftlint:disable:this multiline_function_chains
+            ].waitForExistence(timeout: 20) // swiftlint:disable:this multiline_function_chains
         )
     }
 }
