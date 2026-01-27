@@ -1,6 +1,15 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "App" : {
+
+    },
+    "Dependencies" : {
+
+    },
+    "Dependencies used by %@" : {
+
+    },
     "License Information" : {
       "localizations" : {
         "de" : {
@@ -17,7 +26,11 @@
         }
       }
     },
+    "Open in Browser" : {
+
+    },
     "Packages" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -50,6 +63,7 @@
       }
     },
     "Repository Link" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -66,6 +80,7 @@
       }
     },
     "The following list contains all Swift Package dependencies of the %@ app." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -80,9 +95,6 @@
           }
         }
       }
-    },
-    "This project is licensed under the %@." : {
-
     }
   },
   "version" : "1.0"
