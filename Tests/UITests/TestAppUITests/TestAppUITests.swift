@@ -22,7 +22,7 @@ class TestAppUITests: XCTestCase {
         app.launch()
         XCTAssertTrue(app.wait(for: .runningForeground, timeout: 2.0))
 
-        XCTAssertTrue(app.buttons["TestApp, MIT, Version 1.0"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.buttons["TestApp, MIT, Version: 1.0"].waitForExistence(timeout: 2))
         let speziButton = app.buttons.matching(NSPredicate(
             format: "label LIKE 'Spezi, MIT, Version: 1.*.*'"
         )).element
