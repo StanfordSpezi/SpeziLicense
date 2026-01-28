@@ -26,23 +26,6 @@
     "Open in Browser" : {
 
     },
-    "Packages" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Packages"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Packages"
-          }
-        }
-      }
-    },
     "Please refer to the individual repository links for packages without license labels." : {
       "localizations" : {
         "de" : {
@@ -55,40 +38,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please refer to the individual repository links for packages without license labels."
-          }
-        }
-      }
-    },
-    "Repository Link" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repository Link"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repository Link"
-          }
-        }
-      }
-    },
-    "The following list contains all Swift Package dependencies of the %@ app." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die folgende Liste enthält alle Swift-Paket-Abhängigkeiten der %@ App."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The following list contains all Swift Package dependencies of the %@ app."
           }
         }
       }
