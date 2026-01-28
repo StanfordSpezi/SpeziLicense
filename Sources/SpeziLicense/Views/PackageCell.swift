@@ -12,56 +12,104 @@ import SwiftUI
 
 
 struct PackageCell: View {
-    let package: Package
+    struct Config: Hashable {
+        let name: String
+        let versionString: String?
+        let url: URL?
+        let license: License?
+        let licenseText: String?
+    }
     
+    private let config: Config
     
     var body: some View {
+        // - if we have the package's license text: the cell is a NavigationLink that shows the license text, and has a button to open the package's web site
+        // - if we don't have the text: the cell is a button that directly opens the web site
+        // - if we have neither the license text, nor the url: the cell is a button that does nothing.
+        if let licenseText = config.licenseText {
+            NavigationLink {
+                LicenseView(
+                    title: config.name,
+                    url: config.url,
+                    licenseText: licenseText
+                )
+            } label: {
+                rowContent
+            }
+        } else {
+            Button {
+                openPackageUrl()
+            } label: {
+                rowContent
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+        }
+    }
+    
+    private var rowContent: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(package.name).font(.headline)
                 HStack {
-                    if let details = getPackageDetails(package: package) {
-                        Text(details)
-                            .font(.caption)
+                    Text(config.name)
+                        .font(.headline)
+                    if let licenseType = config.license {
+                        licenseBadge(for: licenseType)
                     }
-                    if let licenseType = License(package: package) {
-                        Text(licenseType.spdxIdentifier)
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .padding(2)
-                            .background(Color(.systemGray5))
-                            .cornerRadius(4)
-                    }
+                }
+                if let rule = config.versionString {
+                    Text(rule)
+                        .font(.caption)
                 }
             }
             Spacer()
-            Button(
-                action: {
-                    if let url = URL(string: package.location) {
-                        UIApplication.shared.open(url)
-                    } else {
-                        let logger = Logger(subsystem: "edu.stanford.spezi.SpeziLicense", category: "UI")
-                        logger.error("Unable to parse package location into URL: '\(package.location)'")
-                    }
-                },
-                label: {
-                    Image(systemName: "safari.fill")
-                        .imageScale(.large)
-                }
-            )
-                .buttonStyle(PlainButtonStyle())
-                .foregroundColor(.blue)
-                .accessibilityLabel(Text("Repository Link"))
+            if config.licenseText == nil {
+                // If we don't have a licence text to push, the row view is not embedded in a NavigationLink,
+                // and we need to manually add the disclosure indicator to keep the layout in sync with the surrounding rows.
+                DisclosureIndicator()
+            }
         }
     }
     
     
-    func getPackageDetails(package: Package) -> String? {
-        if let branch = package.branch {
+    init(config: Config) {
+        self.config = config
+    }
+    
+    init(package: Package) {
+        config = Config(
+            name: package.name,
+            versionString: package.dependencyRuleDesc,
+            url: URL(string: package.location),
+            license: License(package: package),
+            licenseText: package.license
+        )
+    }
+    
+    private func licenseBadge(for licenseType: License) -> some View {
+        Text(licenseType.spdxIdentifier)
+            .font(.caption)
+            .fontWeight(.semibold)
+            .padding(2)
+            .background(Color(.systemGray5))
+            .cornerRadius(4)
+    }
+    
+    private func openPackageUrl() {
+        if let url = config.url {
+            UIApplication.shared.open(url)
+        }
+    }
+}
+
+
+extension Package {
+    fileprivate var dependencyRuleDesc: String? {
+        if let branch = branch {
             "Branch: \(branch)"
-        } else if let version = package.version {
+        } else if let version = version {
             "Version: \(version)"
-        } else if let revision = package.revision {
+        } else if let revision = revision {
             "Revision: \(revision)"
         } else {
             nil

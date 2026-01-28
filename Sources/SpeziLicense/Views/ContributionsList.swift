@@ -25,55 +25,96 @@ import SwiftUI
 /// }
 /// ```
 public struct ContributionsList: View {
-    var packages: [Package]
-    let appName: String?
-    let projectLicense: License?
-
+    struct ProjectInfo {
+        let name: AppName
+        let url: URL?
+        let license: License?
+    }
+    
+    private let packages: [Package]
+    private let projectInfo: ProjectInfo
     
     public var body: some View {
-            List {
-                Section {
-                    if let appName {
-                        Text("The following list contains all Swift Package dependencies of the \(appName) app.", bundle: .module)
-                    }
-                } footer: {
-                    if let projectLicense {
-                        Text("This project is licensed under the \(projectLicense.name).", bundle: .module)
-                    }
-                }
-                Section(
-                    header: Text("Packages", bundle: .module),
-                    footer: Text("Please refer to the individual repository links for packages without license labels.", bundle: .module)
-                ) {
-                    ForEach(packages.sorted(by: { $0.name < $1.name }), id: \.name) { package in
-                        PackageCell(package: package)
-                    }
-                }
+        Form {
+            Section {
+                PackageCell(config: appSectionRowConfig)
             }
-                .navigationTitle("License Information")
-                .navigationBarTitleDisplayMode(.inline)
+            Section {
+                ForEach(packages, id: \.identity) { package in
+                    PackageCell(package: package)
+                }
+            } header: {
+                let appName = projectInfo.name.value
+                if !appName.isEmpty {
+                    Text("Dependencies used by \(projectInfo.name.value)", bundle: .module)
+                } else {
+                    Text("Dependencies", bundle: .module)
+                }
+            } footer: {
+                Text("Please refer to the individual repository links for packages without license labels.", bundle: .module)
+            }
+        }
+        .navigationTitle(LocalizedStringResource("License Information", bundle: .module))
+        .navigationBarTitleDisplayMode(.inline)
     }
     
-    /// - Parameter projectLicense: Optional SPDX-License-Identifier to inform user about the project's license.
-    public init(projectLicense: License? = nil) {
-        self.packages = PackageHelper.getPackageList()
-        self.appName = Bundle.main.applicationName
-        self.projectLicense = projectLicense
+    private var appSectionRowConfig: PackageCell.Config {
+        PackageCell.Config(
+            name: projectInfo.name.value,
+            versionString: { () -> String? in
+                if projectInfo.name == .automatic, let string = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                    "Version: \(string)"
+                } else {
+                    nil
+                }
+            }(),
+            url: projectInfo.url,
+            license: projectInfo.license,
+            licenseText: nil
+        )
     }
     
-    /// - Parameters:
-    ///   - appName: The name of the app to be rendered in the information text at the top of the view instead of the Display Name configured in the Xcode project.
-    ///   - projectLicense: Optional SPDX-License-Identifier to inform user about the project's license.
-    public init(appName: String, projectLicense: License? = nil) {
-        self.packages = PackageHelper.getPackageList()
-        self.appName = appName
-        self.projectLicense = projectLicense
+    private init(packages: [Package], projectInfo: ProjectInfo) {
+        self.packages = packages.sorted(using: KeyPathComparator(\.name, comparator: String.Comparator(options: .caseInsensitive)))
+        self.projectInfo = projectInfo
     }
     
-    init(packages: [Package], appName: String, projectLicense: License? = nil) {
-        self.packages = packages
-        self.appName = appName
-        self.projectLicense = projectLicense
+    /// Creates a `ContributionsList`.
+    ///
+    /// - parameter appName: The name of the app to be rendered in the information text at the top of the view.
+    ///     Defaults to ``AppName/automatic``, which reads the name from the main Bundle.
+    /// - parameter projectLicense: Optional SPDX-License-Identifier to inform user about the project's license.
+    /// - parameter additionalPackages: Additional entries that should be displayed in the list but are not present in the app's SPM dependencies.
+    ///     Intended for non-SPM dependencies.
+    public init(
+        appName: AppName = .automatic,
+        projectLicense: License? = nil,
+        projectUrl: URL? = nil,
+        additionalPackages: [Package] = []
+    ) {
+        self.init(
+            packages: PackageList.spmPackages,
+            projectInfo: .init(name: appName, url: projectUrl, license: projectLicense)
+        )
+    }
+}
+
+
+extension ContributionsList {
+    public struct AppName: Hashable, ExpressibleByStringLiteral, Sendable {
+        /// The app name as present in the main bundle.
+        public static let automatic = Self(value: Bundle.main.applicationName ?? "")
+        
+        let value: String
+        
+        private init(value: String) {
+            self.value = value
+        }
+        
+        /// Creates a new app name from a string literal.
+        public init(stringLiteral value: String) {
+            self.value = value
+        }
     }
 }
 
@@ -92,6 +133,6 @@ public struct ContributionsList: View {
             license: "MIT License"
         )
     ]
-    return ContributionsList(packages: mockPackages, appName: "TestApp", projectLicense: .mit)
+    return ContributionsList(appName: "TestApp", projectLicense: .mit, additionalPackages: mockPackages)
 }
 #endif

@@ -14,7 +14,12 @@ import SwiftUI
 struct UITestsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContributionsList(projectLicense: .mit)
+            NavigationStack {
+                ContributionsList(
+                    projectLicense: .mit,
+                    projectUrl: URL(string: "https://github.com/StanfordSpezi/SpeziLicense")
+                )
+            }
         }
     }
 }

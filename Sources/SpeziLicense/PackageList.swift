@@ -10,17 +10,15 @@ import Foundation
 import SwiftPackageList
 
 
-enum PackageHelper {
-    /// Helper function that calls the corresponding API of `SwiftPackageList`to fetch the list of packages
-    static func getPackageList() -> [Package] {
+enum PackageList {
+    /// The list of all packages, as returned by `SwiftPackageList`'s API.
+    static let spmPackages: [Package] = {
         do {
             let packageProvider = JSONPackageProvider(bundle: .main, fileName: "package-list")
-            let packages = try packageProvider.packages()
-            
-            return packages
+            return try packageProvider.packages()
         } catch {
-            print(error)
+            print("Failed loading package-list.json: \(error)")
         }
         return []
-    }
+    }()
 }

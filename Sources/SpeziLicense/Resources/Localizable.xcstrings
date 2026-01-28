@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Dependencies" : {
+
+    },
+    "Dependencies used by %@" : {
+
+    },
     "License Information" : {
       "localizations" : {
         "de" : {
@@ -17,21 +23,8 @@
         }
       }
     },
-    "Packages" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Packages"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Packages"
-          }
-        }
-      }
+    "Open in Browser" : {
+
     },
     "Please refer to the individual repository links for packages without license labels." : {
       "localizations" : {
@@ -48,41 +41,6 @@
           }
         }
       }
-    },
-    "Repository Link" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repository Link"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repository Link"
-          }
-        }
-      }
-    },
-    "The following list contains all Swift Package dependencies of the %@ app." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die folgende Liste enthält alle Swift-Paket-Abhängigkeiten der %@ App."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The following list contains all Swift Package dependencies of the %@ app."
-          }
-        }
-      }
-    },
-    "This project is licensed under the %@." : {
-
     }
   },
   "version" : "1.0"
