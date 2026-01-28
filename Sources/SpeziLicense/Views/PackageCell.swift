@@ -28,7 +28,11 @@ struct PackageCell: View {
         // - if we have neither the license text, nor the url: the cell is a button that does nothing.
         if let licenseText = config.licenseText {
             NavigationLink {
-                licenseView(licenseText)
+                LicenseView(
+                    title: config.name,
+                    url: config.url,
+                    licenseText: licenseText
+                )
             } label: {
                 rowContent
             }
@@ -82,7 +86,6 @@ struct PackageCell: View {
         )
     }
     
-    
     private func licenseBadge(for licenseType: License) -> some View {
         Text(licenseType.spdxIdentifier)
             .font(.caption)
@@ -90,23 +93,6 @@ struct PackageCell: View {
             .padding(2)
             .background(Color(.systemGray5))
             .cornerRadius(4)
-    }
-    
-    private func licenseView(_ text: String) -> some View {
-        ScrollView {
-            Text(text)
-                .padding(.horizontal)
-        }
-        .navigationTitle(config.name)
-        .toolbar {
-            if config.url != nil {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Open in Browser", systemImage: "safari") {
-                        openPackageUrl()
-                    }
-                }
-            }
-        }
     }
     
     private func openPackageUrl() {
