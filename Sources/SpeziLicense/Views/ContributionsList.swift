@@ -62,8 +62,8 @@ public struct ContributionsList: View {
         PackageCell.Config(
             name: projectInfo.name.value,
             versionString: { () -> String? in
-                if projectInfo.name == .automatic {
-                    Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                if projectInfo.name == .automatic, let string = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                    "Version: \(string)"
                 } else {
                     nil
                 }
