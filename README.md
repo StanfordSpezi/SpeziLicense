@@ -17,11 +17,24 @@ SPDX-License-Identifier: MIT
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FStanfordSpezi%2FSpeziLicense%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/StanfordSpezi/SpeziLicense)
 
 
-Provides a view that renders a list of all package dependecies used in the project.
+Provides a view that renders a list of third-party libraries used in an iOS app.
 
-| ![Screenshot showing the ContributionsList.](Sources/SpeziLicense/SpeziLicense.docc/Resources/Overview.png#gh-light-mode-only) ![Screenshot showing the ContributionsList.](Sources/SpeziLicense/SpeziLicense.docc/Resources/Overview~dark.png#gh-dark-mode-only) |
- |:---:|
- | A [`ContributionsList`](https://swiftpackageindex.com/stanfordspezi/spezilicense/documentation/spezilicense/contributionslist) rendered in the Spezi Template Application. |
+<table style="width: 80%">
+  <tr>
+    <td align="center" width="50%">
+      <img src="Sources/SpeziLicense/SpeziLicense.docc/Resources/Overview.png#gh-light-mode-only" width="80%"/>
+      <img src="Sources/SpeziLicense/SpeziLicense.docc/Resources/Overview~dark.png#gh-dark-mode-only" width="80%"/>
+    </td>
+    <td align="center" width="50%">
+      <img src="Sources/SpeziLicense/SpeziLicense.docc/Resources/License.png#gh-light-mode-only" width="80%"/>
+      <img src="Sources/SpeziLicense/SpeziLicense.docc/Resources/License~dark.png#gh-dark-mode-only" width="80%"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">Acknowledgements List</td>
+    <td align="center">Dependency License Text</td>
+  </tr>
+</table>
 
 ## Overview
 
