@@ -7,11 +7,10 @@
 //
 
 @testable import SpeziLicense
-import XCTest
+import Testing
 
 
-final class SpeziLicenseTests: XCTestCase {
-    func testSpeziLicense() throws {
-        XCTAssertTrue(true)
-    }
+@Test("Spezi License Works")
+func speziLicenseWorks() {
+    #expect(true)
 }
