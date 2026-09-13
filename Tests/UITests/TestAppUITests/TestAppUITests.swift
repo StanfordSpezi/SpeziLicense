@@ -38,6 +38,13 @@ class TestAppUITests: XCTestCase {
         app.navigationBars.buttons["Open in Browser"].tap()
         
         let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
-        XCTAssertTrue(safari.wait(for: .runningForeground, timeout: 20))
+        let addressField = safari.textFields["Address"].firstMatch
+        XCTAssertTrue(addressField.waitForExistence(timeout: 20))
+        addressField.tap()
+
+        let destinationField = safari.textFields.matching(NSPredicate(
+            format: "value CONTAINS[c] 'github.com/StanfordSpezi/Spezi'"
+        )).firstMatch
+        XCTAssertTrue(destinationField.waitForExistence(timeout: 20))
     }
 }
