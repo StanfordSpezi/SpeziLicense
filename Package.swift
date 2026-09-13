@@ -38,6 +38,7 @@ let package = Package(
             name: "SpeziLicenseTests",
             dependencies: [
                 .target(name: "SpeziLicense"),
+                .product(name: "SwiftPackageList", package: "swift-package-list"),
                 .product(name: "Spezi", package: "Spezi")
             ],
             swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
