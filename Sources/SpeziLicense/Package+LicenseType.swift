@@ -11,6 +11,7 @@ import SwiftPackageList
 
 
 extension License {
+    private static let spdxIdentifierMarker = "SPDX-License-" + "Identifier:"
     // Constants representing typical text and regular expression patterns often found in license files.
     // They are used for matching and identifying different types of licenses within text documents.
     private static let mitText = "MIT License"
@@ -37,32 +38,67 @@ extension License {
         Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.(.*) \
         This notice may not be removed or altered from any source distribution.
         """
+    private static let supportedLicenses = [
+        License.mit,
+        .apachev2,
+        .gplv2,
+        .gplv3,
+        .bsd2,
+        .bsd3,
+        .bsd4,
+        .zlib
+    ]
     
     
     /// Generates the `LicenseType` from a license document of `String`
     init?(package: Package) {
-        guard let license = package.license?.replacingOccurrences(of: "\\s+|\\n", with: " ", options: .regularExpression) else {
+        guard let licenseText = package.license else {
             return nil
         }
+
+        if let license = Self.licenseFromSPDXIdentifier(in: licenseText) {
+            self = license
+            return
+        }
+
+        let license = licenseText
+            .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+            .lowercased()
         
-        if license.contains(License.mitText) {
+        if license.contains(License.mitText.lowercased()) {
             self = .mit
-        } else if license.contains(License.apacheText) && license.contains("Version 2.0") {
+        } else if license.contains(License.apacheText.lowercased()) && license.contains("version 2.0") {
             self = .apachev2
-        } else if license.contains(License.gnuText) && license.contains("Version 2") {
+        } else if license.contains(License.gnuText.lowercased()) && license.contains("version 2") {
             self = .gplv2
-        } else if license.contains(License.gnuText) && license.contains("Version 3") {
+        } else if license.contains(License.gnuText.lowercased()) && license.contains("version 3") {
             self = .gplv3
-        } else if license.contains(License.bsdFourClauseText) {
+        } else if license.contains(License.bsdFourClauseText.lowercased()) {
             self = .bsd4
-        } else if license.range(of: License.bsdThreeClausePattern, options: .regularExpression) != nil {
+        } else if license.range(of: License.bsdThreeClausePattern.lowercased(), options: .regularExpression) != nil {
             self = .bsd3
-        } else if license.contains(License.bsdTwoClauseText) {
+        } else if license.contains(License.bsdTwoClauseText.lowercased()) {
             self = .bsd2
-        } else if license.range(of: License.zlibPattern, options: .regularExpression) != nil {
+        } else if license.range(of: License.zlibPattern.lowercased(), options: .regularExpression) != nil {
             self = .zlib
         } else {
             return nil
+        }
+    }
+
+    private static func licenseFromSPDXIdentifier(in text: String) -> License? {
+        let identifiers = text
+            .components(separatedBy: .newlines)
+            .compactMap { line -> String? in
+                guard let separator = line.range(of: spdxIdentifierMarker, options: .caseInsensitive) else {
+                    return nil
+                }
+                return line[separator.upperBound...].trimmingCharacters(in: .whitespaces)
+            }
+
+        let candidates = identifiers + [text.trimmingCharacters(in: .whitespacesAndNewlines)]
+        return supportedLicenses.first { license in
+            candidates.contains { $0.caseInsensitiveCompare(license.spdxIdentifier) == .orderedSame }
         }
     }
 }

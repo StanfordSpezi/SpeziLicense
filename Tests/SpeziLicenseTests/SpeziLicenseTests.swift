@@ -47,6 +47,30 @@ func recognizesKnownLicenseTexts() {
     }
 }
 
+@Test(
+    "Recognizes standardized identifiers regardless of package-specific license wording",
+    arguments: [License.mit, .apachev2, .gplv2, .gplv3, .bsd2, .bsd3, .bsd4, .zlib]
+)
+func recognizesSPDXIdentifiers(_ expected: License) {
+    let identifierMarker = "SPDX-License-" + "Identifier:"
+
+    #expect(License(package: package(license: expected.spdxIdentifier)) == expected)
+    #expect(
+        License(package: package(license: "Package-specific notice\n\(identifierMarker) \(expected.spdxIdentifier)")) == expected
+    )
+}
+
+@Test("License signature matching ignores capitalization and whitespace")
+func normalizesLicenseText() {
+    let license = """
+        mit
+
+              LICENSE
+        """
+
+    #expect(License(package: package(license: license)) == .mit)
+}
+
 @Test("Rejects missing and unknown license texts")
 func rejectsUnknownLicenseTexts() {
     #expect(License(package: package(license: nil)) == nil)
