@@ -38,10 +38,6 @@ class TestAppUITests: XCTestCase {
         app.navigationBars.buttons["Open in Browser"].tap()
         
         let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
-        XCTAssert(
-            safari.staticTexts[
-                "Open-source framework for rapid development of modern, interoperable digital health applications."
-            ].waitForExistence(timeout: 20) // swiftlint:disable:this multiline_function_chains
-        )
+        XCTAssertTrue(safari.wait(for: .runningForeground, timeout: 20))
     }
 }

@@ -1,0 +1,22 @@
+#
+# This source file is part of the Stanford Spezi open-source project
+#
+# SPDX-FileCopyrightText: 2026 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
+dirs:
+  - .
+useGitIgnore: true
+ignorePatterns:
+  - pattern: '^doc:.*$'
+  - pattern: '^http://localhost.*$'
+  # These permanent links intermittently return 403 responses to the link checker's automated requests.
+  - pattern: '^https://doi\.org/.*$'
+  - pattern: '^https://zenodo\.org/.*$'
+replacementPatterns:
+  - pattern: '(.*)#gh-dark-mode-only'
+    replacement: '$1'
+  - pattern: '(.*)#gh-light-mode-only'
+    replacement: '$1'
