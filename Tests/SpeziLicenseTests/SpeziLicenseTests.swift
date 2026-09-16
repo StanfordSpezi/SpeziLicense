@@ -7,11 +7,86 @@
 //
 
 @testable import SpeziLicense
-import XCTest
+import SwiftPackageList
+import Testing
 
 
-final class SpeziLicenseTests: XCTestCase {
-    func testSpeziLicense() throws {
-        XCTAssertTrue(true)
+@Test("Recognizes known license texts")
+func recognizesKnownLicenseTexts() {
+    let licenses: [(text: String, expected: License)] = [
+        ("MIT License", .mit),
+        ("Apache License Version 2.0", .apachev2),
+        ("GNU GENERAL PUBLIC LICENSE Version 2", .gplv2),
+        ("GNU GENERAL PUBLIC LICENSE Version 3", .gplv3),
+        (
+            "Redistribution and use in source and binary forms, with or without modification, are permitted provided that "
+                + "the following conditions are met",
+            .bsd2
+        ),
+        (
+            "Neither the name of Example nor the names of its contributors may be used to endorse or promote products derived from this software "
+                + "without specific prior written permission",
+            .bsd3
+        ),
+        (
+            "All advertising materials mentioning features or use of this software must display the following acknowledgement: "
+                + "this product includes software developed by Example",
+            .bsd4
+        ),
+        (
+            "The origin of this software must not be misrepresented; you must not claim that you wrote the original software. "
+                + "If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required. "
+                + "Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software. "
+                + "This notice may not be removed or altered from any source distribution.",
+            .zlib
+        )
+    ]
+
+    for license in licenses {
+        #expect(License(package: package(license: license.text)) == license.expected)
     }
+}
+
+@Test(
+    "Recognizes standardized identifiers regardless of package-specific license wording",
+    arguments: [License.mit, .apachev2, .gplv2, .gplv3, .bsd2, .bsd3, .bsd4, .zlib]
+)
+func recognizesSPDXIdentifiers(_ expected: License) {
+    let identifierMarker = "SPDX-License-" + "Identifier:"
+
+    #expect(License(package: package(license: expected.spdxIdentifier)) == expected)
+    #expect(
+        License(package: package(license: "Package-specific notice\n\(identifierMarker) \(expected.spdxIdentifier)")) == expected
+    )
+}
+
+@Test("License signature matching ignores capitalization and whitespace")
+func normalizesLicenseText() {
+    let license = """
+        mit
+
+              LICENSE
+        """
+
+    #expect(License(package: package(license: license)) == .mit)
+}
+
+@Test("Rejects missing and unknown license texts")
+func rejectsUnknownLicenseTexts() {
+    #expect(License(package: package(license: nil)) == nil)
+    #expect(License(package: package(license: "A proprietary license")) == nil)
+}
+
+
+private func package(license: String?) -> Package {
+    Package(
+        kind: .remoteSourceControl,
+        identity: "example",
+        name: "Example",
+        version: "1.0.0",
+        branch: nil,
+        revision: nil,
+        location: "https://example.com/example.git",
+        license: license
+    )
 }
